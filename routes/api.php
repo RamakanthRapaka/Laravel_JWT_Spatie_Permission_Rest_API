@@ -29,6 +29,14 @@ Route::group(['prefix' => '/v1'], function () {
     Route::post('me', 'AuthController@me');
 });
 
-Route::group(['middleware' => ['spatiejwt:admin,createuser'], 'prefix' => '/v1'], function() {
+Route::group(['middleware' => ['spatiejwt:admin,create user'], 'prefix' => '/v1'], function() {
     Route::post('createuser', 'AuthController@createuser');
+});
+
+Route::group(['middleware' => ['spatiejwt:admin,create permission'], 'prefix' => '/v1'], function() {
+    Route::post('createpermission', 'AuthController@CreatePermission');
+});
+
+Route::group(['middleware' => ['spatiejwt:admin,assign permission'], 'prefix' => '/v1'], function() {
+    Route::post('assignpermission', 'AuthController@AssignPermission');
 });

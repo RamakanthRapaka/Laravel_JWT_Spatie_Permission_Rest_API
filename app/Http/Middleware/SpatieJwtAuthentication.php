@@ -26,7 +26,7 @@ class SpatieJwtAuthentication extends BaseMiddleware {
             return Response::json([
                         'status' => 'error',
                         'status_code' => Res::HTTP_BAD_REQUEST,
-                        'message' => 'Invalid token!',
+                        'message' => 'Invalid Not Provided!',
             ]);
         }
 

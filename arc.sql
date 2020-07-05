@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2020 at 05:58 PM
+-- Generation Time: Jul 05, 2020 at 08:11 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.30
 
@@ -110,7 +110,9 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (1, 'create user', 'api', '2020-07-05 08:03:50', '2020-07-05 08:03:50'),
 (2, 'edit user', 'api', '2020-07-05 08:07:45', '2020-07-05 08:07:45'),
 (3, 'delete user', 'api', '2020-07-05 08:43:46', '2020-07-05 08:43:46'),
-(4, 'createuser', 'api', '2020-07-05 12:00:55', '2020-07-05 12:00:55');
+(4, 'create permission', 'api', '2020-07-05 12:00:55', '2020-07-05 12:00:55'),
+(5, 'assign permission', 'api', '2020-07-05 17:30:50', '2020-07-05 17:30:50'),
+(6, 'remove permission', 'api', '2020-07-05 12:34:11', '2020-07-05 12:34:11');
 
 -- --------------------------------------------------------
 
@@ -152,7 +154,10 @@ CREATE TABLE `role_has_permissions` (
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (1, 1),
 (2, 1),
-(3, 1);
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1);
 
 -- --------------------------------------------------------
 
@@ -254,7 +259,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `roles`
