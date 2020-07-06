@@ -75,23 +75,30 @@ class PermissionController extends ApiController {
         }
 
         try {
-            $message = 'Permission Created Created!';
+            $message = 'Permission Created!';
             $status_code = Res::HTTP_CREATED;
+            if ($request->input('id') === NULL) {
+                $permission = Permission::create(['name' => $request->input('name')]);
+            }
 
-            /* $message = 'Permission Created Updated!';
-              $status_code = Res::HTTP_OK;
-              $permission = \App\Permission::when($request->input('id'), function($query) use ($request) {
-              return $query->where('permissions.id', $request->input('id'));
-              })->first();
-              if ($permission === NULL) {
-              $permission = new \App\Permission;
-              $message = 'Permission Created Successfully!';
-              $status_code = Res::HTTP_CREATED;
-              }
-              $permission->name = $request->input('name');
-              $permission->save(); */
+            if ($request->input('id') != NULL) {
+                $message = 'Permission Updated!';
+                $status_code = Res::HTTP_OK;
+                $permission = \App\Permission::when($request->input('id'), function($query) use ($request) {
+                            return $query->where('permissions.id', $request->input('id'));
+                        })->first();
 
-            $permission = Permission::create(['name' => $request->input('name')]);
+                if ($permission === NULL) {
+                    return $this->respond([
+                                'status' => 'error',
+                                'status_code' => Res::HTTP_NOT_FOUND,
+                                'message' => 'Permission Not Found!',
+                    ]);
+                }
+                $permission->name = $request->input('name');
+                $permission->save();
+                \Artisan::call('cache:clear');
+            }
 
             return $this->respond([
                         'status' => 'success',
