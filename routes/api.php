@@ -33,10 +33,18 @@ Route::group(['middleware' => ['spatiejwt:admin,create user'], 'prefix' => '/v1'
     Route::post('createuser', 'AuthController@createuser');
 });
 
+Route::group(['middleware' => ['spatiejwt:admin,get permissions'], 'prefix' => '/v1'], function() {
+    Route::post('getpermissions', 'PermissionController@GetPermissions');
+});
+
 Route::group(['middleware' => ['spatiejwt:admin,create permission'], 'prefix' => '/v1'], function() {
-    Route::post('createpermission', 'AuthController@CreatePermission');
+    Route::post('createpermission', 'PermissionController@CreatePermission');
 });
 
 Route::group(['middleware' => ['spatiejwt:admin,assign permission'], 'prefix' => '/v1'], function() {
-    Route::post('assignpermission', 'AuthController@AssignPermission');
+    Route::post('assignpermission', 'PermissionController@AssignPermission');
+});
+
+Route::group(['middleware' => ['spatiejwt:admin,remove permission'], 'prefix' => '/v1'], function() {
+    Route::post('removepermissiontorole', 'PermissionController@RemovePermissionToRole');
 });
