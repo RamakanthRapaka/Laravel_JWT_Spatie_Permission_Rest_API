@@ -154,6 +154,14 @@ class RoleController extends ApiController {
                 ]);
             }
 
+            if ($user_role->getRoleNames() != NULL) {
+                return $this->respond([
+                            'status' => 'error',
+                            'status_code' => Res::HTTP_UNPROCESSABLE_ENTITY,
+                            'message' => 'User Already Had Another Role!'
+                ]);
+            }
+
             $user_role->assignRole($role->name);
 
             return $this->respond([
