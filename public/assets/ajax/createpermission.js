@@ -4,20 +4,21 @@
  * and open the template in the editor.
  */
 $("#createpermission").click(function () {
+    var api_token = localStorage.getItem("api_token");
     $.ajax({
-        url: 'http://arc.test/api/v1/login',
+        url: 'http://arc.test/api/v1/createpermission',
+        headers: {
+            'Authorization': 'Bearer ' + api_token
+        },
         method: 'POST',
         data: {
-            email: $("#email").val(),
-            password: $("#password").val()
+            name: $("#name").val(),
+            id: $("#id").val()
         },
         success: function (data) {
             if (data.status_code == '200') {
-                localStorage.setItem("api_token", data.data.api_token);
-                window.location.replace('/home');
             }
             if (data.status_code == '422') {
-                alert('Validation Failed');
             }
         }
     });

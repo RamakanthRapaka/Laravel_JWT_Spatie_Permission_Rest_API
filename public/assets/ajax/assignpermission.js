@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$("#createpermission").click(function () {
+$("#assignpermission").click(function () {
+    var api_token = localStorage.getItem("api_token");
     $.ajax({
-        url: 'http://arc.test/api/v1/login',
+        url: 'http://arc.test/api/v1/assignpermission',
+        headers: {
+            'Authorization': 'Bearer ' + api_token
+        },
         method: 'POST',
         data: {
-            email: $("#email").val(),
-            password: $("#password").val()
+            role_id: $("#role_id").val(),
+            permission_id: $("#permission_id").val()
         },
         success: function (data) {
             if (data.status_code == '200') {
-                localStorage.setItem("api_token", data.data.api_token);
-                window.location.replace('/home');
             }
             if (data.status_code == '422') {
-                alert('Validation Failed');
             }
         }
     });
