@@ -13,7 +13,8 @@ $("#login").click(function () {
         },
         success: function (data) {
             if (data.status_code == '200') {
-
+                localStorage.setItem("api_token", data.data.api_token);
+                window.location.replace('/home');
             }
             if (data.status_code == '422') {
                 alert('Validation Failed');
