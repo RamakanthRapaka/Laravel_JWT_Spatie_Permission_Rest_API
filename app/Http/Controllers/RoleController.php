@@ -235,4 +235,41 @@ class RoleController extends ApiController {
         }
     }
 
+    public function GetRolesDataTables(Request $request) {
+
+        $rules = array(
+            'name' => 'sometimes|nullable|max:255',
+            'id' => 'sometimes|nullable|numeric',
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+
+            return $this->respondValidationError('Fields Validation Failed.', $validator->errors());
+        }
+
+        try {
+            $roles = \App\Role::when($request->input('name') != NULL, function($query) use ($request) {
+                        return $query->where("role.name", $request->input('name'));
+                    });
+
+            return $this->respond([
+                        "draw" => 1,
+                        "recordsTotal" => $roles->count(),
+                        "recordsFiltered" => $roles->count(),
+                        'data' => $roles->get()->toArray(),
+            ]);
+        } catch (QueryException $e) {
+            Log::emergency($e);
+            return $this->respondInternalErrors();
+        } catch (\PDOException $e) {
+            Log::emergency($e);
+            return $this->respondInternalErrors();
+        } catch (\Exception $e) {
+            Log::emergency($e);
+            return $this->respondInternalErrors();
+        }
+    }
+
 }

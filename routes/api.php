@@ -71,6 +71,10 @@ Route::group(['middleware' => ['spatiejwt:admin,get role'], 'prefix' => '/v1'], 
     Route::post('getrole', 'RoleController@GetRoles');
 });
 
+Route::group(['middleware' => ['spatiejwt:admin,get roles datatables'], 'prefix' => '/v1'], function() {
+    Route::post('getrolesdatatables', 'RoleController@GetRolesDataTables');
+});
+
 Route::group(['middleware' => ['spatiejwt:admin,assign role'], 'prefix' => '/v1'], function() {
     Route::post('assignrole', 'RoleController@AssignRole');
 });
