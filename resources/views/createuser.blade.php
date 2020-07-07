@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="{{ URL::asset('assets/dist/css/adminlte.min.css') }}">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-        @include('datatablestyle')
+        @include('selecttwostyle')
     </head>
     <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
         <div class="wrapper">
@@ -33,12 +33,12 @@
                     <div class="container-fluid">
                         <div class="row mb-2">
                             <div class="col-sm-6">
-                                <h1>Users</h1>
+                                <h1>Create User</h1>
                             </div>
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
                                     <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
-                                    <li class="breadcrumb-item active">Users</li>
+                                    <li class="breadcrumb-item active">Create User</li>
                                 </ol>
                             </div>
                         </div>
@@ -49,46 +49,48 @@
                 <section class="content">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-12">
-                                <div class="card">
+                            <!-- left column -->
+                            <div class="col-md-12">
+                                <!-- general form elements -->
+                                <div class="card card-primary">
                                     <div class="card-header">
-                                        <h3 class="card-title">Users</h3>
+                                        <h3 class="card-title">Create User</h3>
                                     </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <table id="example2" class="table table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>NAME</th>
-                                                    <th>EMAIL</th>
-                                                    <th>CREATED AT</th>
-                                                    <th>ROLE</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
+                                    <!-- form start -->
+                                    <form role="form">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Name</label>
+                                                <input type="text" id="name" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email</label>
+                                                <input type="email" id="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Email">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Password</label>
+                                                <input type="password" id="password" name="password" class="form-control" id="exampleInputEmail1" placeholder="Enter Password">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Select Role</label>
+                                                <select class="form-control select2" id="role_id" name="role_id" style="width: 100%;">
 
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>NAME</th>
-                                                    <th>EMAIL</th>
-                                                    <th>CREATED AT</th>
-                                                    <th>ROLE</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                    <!-- /.card-body -->
+                                                </select>                                            
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+
+                                        <div class="card-footer">
+                                            <button type="button" id="createuser" name="createuser" class="btn btn-primary">Create</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <!-- /.card -->
+
                             </div>
-                            <!-- /.col -->
+                            <!--/.col (left) -->
                         </div>
                         <!-- /.row -->
-                    </div>
-                    <!-- /.container-fluid -->
+                    </div><!-- /.container-fluid -->
                 </section>
                 <!-- /.content -->
             </div>
@@ -102,24 +104,8 @@
             <!-- /.control-sidebar -->
 
             <!-- Main Footer -->
+            @include('footer')
         </div>
         <!-- ./wrapper -->
-
-        <!-- REQUIRED SCRIPTS -->
-        <!-- jQuery -->
-        <script src="{{ URL::asset('assets/plugins/jquery/jquery.min.js') }}"></script>
-        <!-- Bootstrap -->
-        <script src="{{ URL::asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <!-- overlayScrollbars -->
-        <script src="{{ URL::asset('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-        <!-- AdminLTE App -->
-        <script src="{{ URL::asset('assets/dist/js/adminlte.js') }}"></script>
-
-        <!-- OPTIONAL SCRIPTS -->
-        <script src="{{ URL::asset('assets/dist/js/demo.js') }}"></script>
-        <!-- Ajax Cals -->
-        <script src="{{ URL::asset('assets/ajax/checkauth.js') }}"></script>
-        @include('footer')
-        @include('datatables')
     </body>
 </html>

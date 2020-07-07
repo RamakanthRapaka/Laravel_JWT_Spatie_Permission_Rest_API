@@ -175,7 +175,35 @@ class AuthController extends ApiController {
     }
 
     public function createuser(Request $request) {
-        return 'Hi!';
+        $rules = array(
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6',
+            'role_id' => 'required|numeric'
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+
+            return $this->respondValidationError('Fields Validation Failed.', $validator->errors());
+        } else {
+
+            $user = User::create([
+                        'name' => $request->input('name'),
+                        'email' => $request->input('email'),
+                        'password' => \Hash::make($request->input('password')),
+            ]);
+
+            $role = Role::findById($request->input('role_id'));
+            $user->assignRole($role->name);
+
+            return $this->respond([
+                        'status' => 'success',
+                        'status_code' => Res::HTTP_OK,
+                        'message' => 'User Created Successfully!'
+            ]);
+        }
     }
 
     public function GetUsers(Request $request) {
@@ -193,7 +221,7 @@ class AuthController extends ApiController {
         }
 
         try {
-            $users = User::get()->toArray();
+            $users = User::with('roles')->get()->toArray();
 
             return $this->respond([
                         'status' => 'success',
