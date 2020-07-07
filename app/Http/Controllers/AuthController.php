@@ -13,6 +13,7 @@ use App\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Repository\Transformers\UserTransformer;
+use App\Repository\Transformers\UserDataTransformer;
 use Illuminate\Database\QueryException as QueryException;
 
 class AuthController extends ApiController {
@@ -23,10 +24,12 @@ class AuthController extends ApiController {
      * @return void
      */
     protected $userTransformer;
+    protected $userdataTransformer;
 
-    public function __construct(userTransformer $userTransformer) {
+    public function __construct(userTransformer $userTransformer, userdataTransformer $userdataTransformer) {
 
         $this->userTransformer = $userTransformer;
+        $this->userdataTransformer = $userdataTransformer;
         //$this->middleware('auth:api', ['except' => ['authenticate', 'register']]);
     }
 
@@ -95,7 +98,6 @@ class AuthController extends ApiController {
         $user->api_token = $token;
 
         return $this->respond([
-
                     'status' => 'success',
                     'status_code' => Res::HTTP_OK,
                     'message' => 'Logged In Successfully!',
@@ -111,7 +113,24 @@ class AuthController extends ApiController {
      * @return \Illuminate\Http\JsonResponse
      */
     public function me() {
-        return response()->json(auth()->user());
+        $user = auth()->user();
+
+        if ($user != NULL) {
+            return $this->respond([
+                        'status' => 'success',
+                        'status_code' => Res::HTTP_OK,
+                        'message' => 'Logged In Successfully!',
+                        'data' => $this->userdataTransformer->transform($user),
+            ]);
+        }
+
+        if ($user === NULL) {
+            return $this->respond([
+                        'status' => 'error',
+                        'status_code' => Res::HTTP_UNAUTHORIZED,
+                        'message' => 'Session Expired!',
+            ]);
+        }
     }
 
     /**

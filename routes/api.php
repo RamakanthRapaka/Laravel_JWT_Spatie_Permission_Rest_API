@@ -24,9 +24,15 @@ Route::group(['prefix' => '/v1'], function () {
 
     Route::post('login', 'AuthController@authenticate');
     Route::post('registration', 'AuthController@register');
-    Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
+});
+
+Route::group(['middleware' => ['spatiejwt:admin,check auth'], 'prefix' => '/v1'], function() {
     Route::post('me', 'AuthController@me');
+});
+
+Route::group(['middleware' => ['spatiejwt:admin,logout'], 'prefix' => '/v1'], function() {
+    Route::post('logout', 'AuthController@logout');
 });
 
 Route::group(['middleware' => ['spatiejwt:admin,create user'], 'prefix' => '/v1'], function() {
