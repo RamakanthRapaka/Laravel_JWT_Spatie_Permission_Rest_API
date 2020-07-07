@@ -31,12 +31,16 @@ Route::group(['middleware' => ['spatiejwt:admin,check auth'], 'prefix' => '/v1']
     Route::post('me', 'AuthController@me');
 });
 
-Route::group(['middleware' => ['spatiejwt:admin,logout'], 'prefix' => '/v1'], function() {
+Route::group(['middleware' => ['spatiejwt:admin,log out'], 'prefix' => '/v1'], function() {
     Route::post('logout', 'AuthController@logout');
 });
 
 Route::group(['middleware' => ['spatiejwt:admin,create user'], 'prefix' => '/v1'], function() {
     Route::post('createuser', 'AuthController@createuser');
+});
+
+Route::group(['middleware' => ['spatiejwt:admin,get users'], 'prefix' => '/v1'], function() {
+    Route::post('getusers', 'AuthController@GetUsers');
 });
 
 Route::group(['middleware' => ['spatiejwt:admin,get permissions'], 'prefix' => '/v1'], function() {

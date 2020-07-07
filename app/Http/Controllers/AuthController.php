@@ -141,7 +141,13 @@ class AuthController extends ApiController {
     public function logout() {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return $this->respond([
+                    'status' => 'success',
+                    'status_code' => Res::HTTP_OK,
+                    'message' => 'Successfully logged out!',
+        ]);
+
+        //return response()->json(['message' => 'Successfully logged out']);
     }
 
     /**
@@ -170,6 +176,41 @@ class AuthController extends ApiController {
 
     public function createuser(Request $request) {
         return 'Hi!';
+    }
+
+    public function GetUsers(Request $request) {
+
+        $rules = array(
+            'name' => 'sometimes|nullable|max:255',
+            'id' => 'sometimes|nullable|numeric',
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+
+            return $this->respondValidationError('Fields Validation Failed.', $validator->errors());
+        }
+
+        try {
+            $users = User::get()->toArray();
+
+            return $this->respond([
+                        'status' => 'success',
+                        'status_code' => Res::HTTP_OK,
+                        'data' => $users,
+                        'message' => 'Users Details!',
+            ]);
+        } catch (QueryException $e) {
+            Log::emergency($e);
+            return $this->respondInternalErrors();
+        } catch (\PDOException $e) {
+            Log::emergency($e);
+            return $this->respondInternalErrors();
+        } catch (\Exception $e) {
+            Log::emergency($e);
+            return $this->respondInternalErrors();
+        }
     }
 
 }
