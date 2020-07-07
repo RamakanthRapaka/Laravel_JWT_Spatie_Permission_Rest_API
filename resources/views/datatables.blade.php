@@ -41,7 +41,7 @@ $(function () {
             {"data": "name"},
             {"data": "email"},
             {"data": "created_at"},
-            {"data": "created_at"}
+            {"data": "roles[, ].name"}
         ]
     });
 

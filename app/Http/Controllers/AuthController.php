@@ -256,7 +256,8 @@ class AuthController extends ApiController {
         }
 
         try {
-            $users = User::when($request->input('name') != NULL, function($query) use ($request) {
+            $users = User::with('roles')
+                    ->when($request->input('name') != NULL, function($query) use ($request) {
                         return $query->where("user.name", $request->input('name'));
                     });
 
