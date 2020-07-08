@@ -94,6 +94,8 @@
         <script src="{{ URL::asset('assets/dist/js/adminlte.min.js') }}"></script>
         <!-- Ajax Cals -->
         <script src="{{ URL::asset('assets/ajax/login.js') }}"></script>
+        <!-- Check User Logged In Cals -->
+        <script src="{{ URL::asset('assets/ajax/checkauth.js') }}"></script>
 
     </body>
 </html>
