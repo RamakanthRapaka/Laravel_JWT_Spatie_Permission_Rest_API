@@ -6,7 +6,7 @@
 $("#assignrole").click(function () {
     var api_token = localStorage.getItem("api_token");
     $.ajax({
-        url: 'http://arc.test/api/v1/assignrole',
+        url: api_url + '/assignrole',
         headers: {
             'Authorization': 'Bearer ' + api_token
         },

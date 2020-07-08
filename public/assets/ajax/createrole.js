@@ -6,7 +6,7 @@
 $("#createrole").click(function () {
     var api_token = localStorage.getItem("api_token");
     $.ajax({
-        url: 'http://arc.test/api/v1/createrole',
+        url: api_url + '/createrole',
         headers: {
             'Authorization': 'Bearer ' + api_token
         },

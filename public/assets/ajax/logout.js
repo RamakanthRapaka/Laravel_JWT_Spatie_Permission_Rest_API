@@ -6,7 +6,7 @@
 $("#logout").click(function () {
     var api_token = localStorage.getItem("api_token");
     $.ajax({
-        url: 'http://arc.test/api/v1/logout',
+        url: api_url + '/logout',
         headers: {
             'Authorization': 'Bearer ' + api_token
         },

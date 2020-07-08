@@ -6,7 +6,7 @@
 $(document).ready(function () {
     var api_token = localStorage.getItem("api_token");
     $.ajax({
-        url: 'http://arc.test/api/v1/getrole',
+        url: api_url + '/getrole',
         headers: {
             'Authorization': 'Bearer ' + api_token
         },
@@ -25,7 +25,7 @@ $(document).ready(function () {
     });
 
     $.ajax({
-        url: 'http://arc.test/api/v1/getusers',
+        url: api_url + '/getusers',
         headers: {
             'Authorization': 'Bearer ' + api_token
         },
@@ -42,9 +42,9 @@ $(document).ready(function () {
             }
         }
     });
-    
-        $.ajax({
-        url: 'http://arc.test/api/v1/getpermissions',
+
+    $.ajax({
+        url: api_url + '/getpermissions',
         headers: {
             'Authorization': 'Bearer ' + api_token
         },

@@ -17,7 +17,7 @@ $(function () {
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "http://arc.test/api/v1/getusersdatatables",
+            "url": api_url + "/getusersdatatables",
             headers: {
                 'Authorization': 'Bearer ' + api_token
             },
@@ -56,7 +56,7 @@ $(function () {
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "http://arc.test/api/v1/getrolesdatatables",
+            "url": api_url + "/getrolesdatatables",
             headers: {
                 'Authorization': 'Bearer ' + api_token
             },
@@ -93,7 +93,7 @@ $(function () {
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "http://arc.test/api/v1/getpermissionsdatatables",
+            "url": api_url + "/getpermissionsdatatables",
             headers: {
                 'Authorization': 'Bearer ' + api_token
             },

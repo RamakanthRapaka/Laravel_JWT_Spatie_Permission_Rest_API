@@ -6,7 +6,7 @@
 $("#createuser").click(function () {
     var api_token = localStorage.getItem("api_token");
     $.ajax({
-        url: 'http://arc.test/api/v1/createuser',
+        url: api_url + '/createuser',
         headers: {
             'Authorization': 'Bearer ' + api_token
         },

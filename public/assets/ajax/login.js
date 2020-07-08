@@ -5,7 +5,7 @@
  */
 $("#login").click(function () {
     $.ajax({
-        url: 'http://arc.test/api/v1/login',
+        url: api_url + '/login',
         method: 'POST',
         data: {
             email: $("#email").val(),
