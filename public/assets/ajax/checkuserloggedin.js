@@ -12,10 +12,8 @@ $(document).ready(function () {
         },
         method: 'POST',
         success: function (data) {
-            if (data.status_code == '200') {
-            }
-            if (data.status_code != '200') {
-                window.location.replace('/');
+            if (data.status_code == '200' && (window.location.pathname == '/' || window.location.pathname == '/login')) {
+                window.location.replace('/home');
             }
         }
     });

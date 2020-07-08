@@ -95,7 +95,7 @@
         <!-- Ajax Cals -->
         <script src="{{ URL::asset('assets/ajax/login.js') }}"></script>
         <!-- Check User Logged In Cals -->
-        <script src="{{ URL::asset('assets/ajax/checkauth.js') }}"></script>
+        <script src="{{ URL::asset('assets/ajax/checkuserloggedin.js') }}"></script>
 
     </body>
 </html>
