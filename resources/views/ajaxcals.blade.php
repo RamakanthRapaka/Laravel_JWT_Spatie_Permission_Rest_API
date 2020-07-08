@@ -16,3 +16,5 @@
 <script src="{{ URL::asset('assets/ajax/assignrole.js') }}"></script>
 <script src="{{ URL::asset('assets/ajax/loadroleselect.js') }}"></script>
 <script src="{{ URL::asset('assets/ajax/createuser.js') }}"></script>
+<script src="{{ URL::asset('assets/ajax/createpermission.js') }}"></script>
+<script src="{{ URL::asset('assets/ajax/assignpermission.js') }}"></script>

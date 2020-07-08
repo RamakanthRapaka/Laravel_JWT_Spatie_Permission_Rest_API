@@ -51,6 +51,10 @@ Route::group(['middleware' => ['spatiejwt:admin,get permissions'], 'prefix' => '
     Route::post('getpermissions', 'PermissionController@GetPermissions');
 });
 
+Route::group(['middleware' => ['spatiejwt:admin,get permissions datatables'], 'prefix' => '/v1'], function() {
+    Route::post('getpermissionsdatatables', 'PermissionController@GetPermissionsDataTables');
+});
+
 Route::group(['middleware' => ['spatiejwt:admin,create permission'], 'prefix' => '/v1'], function() {
     Route::post('createpermission', 'PermissionController@CreatePermission');
 });

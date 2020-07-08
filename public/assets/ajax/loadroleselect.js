@@ -42,5 +42,24 @@ $(document).ready(function () {
             }
         }
     });
+    
+        $.ajax({
+        url: 'http://arc.test/api/v1/getpermissions',
+        headers: {
+            'Authorization': 'Bearer ' + api_token
+        },
+        method: 'POST',
+        success: function (data) {
+            if (data.status_code == '200') {
+                $.each(data.data, function (k, v) {
+                    var markup = "<option value=" + v.id + ">" + v.name + "</option>";
+                    $("#permission_id").append(markup);
+                });
+            }
+            if (data.status_code != '200') {
+                window.location.replace('/');
+            }
+        }
+    });
 });
 

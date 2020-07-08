@@ -76,19 +76,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/charts/chartjs.html" class="nav-link">
+                            <a href="{{ url('permissions') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Permissions</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/charts/chartjs.html" class="nav-link">
+                            <a href="{{ url('createpermission') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Create Permission</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/charts/flot.html" class="nav-link">
+                            <a href="{{ url('assignpermission') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Assign Permission</p>
                             </a>

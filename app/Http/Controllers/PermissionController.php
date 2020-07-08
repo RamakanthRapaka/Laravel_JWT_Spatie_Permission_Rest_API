@@ -224,5 +224,41 @@ class PermissionController extends ApiController {
             return $this->respondInternalErrors();
         }
     }
+    
+    public function GetPermissionsDataTables(Request $request) {
 
+        $rules = array(
+            'name' => 'sometimes|nullable|max:255',
+            'id' => 'sometimes|nullable|numeric',
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+
+            return $this->respondValidationError('Fields Validation Failed.', $validator->errors());
+        }
+
+        try {
+            $permissions = \App\Permission::when($request->input('name') != NULL, function($query) use ($request) {
+                        return $query->where("permissions.name", $request->input('name'));
+                    });
+
+            return $this->respond([
+                        "draw" => 1,
+                        "recordsTotal" => $permissions->count(),
+                        "recordsFiltered" => $permissions->count(),
+                        'data' => $permissions->get()->toArray(),
+            ]);
+        } catch (QueryException $e) {
+            Log::emergency($e);
+            return $this->respondInternalErrors();
+        } catch (\PDOException $e) {
+            Log::emergency($e);
+            return $this->respondInternalErrors();
+        } catch (\Exception $e) {
+            Log::emergency($e);
+            return $this->respondInternalErrors();
+        }
+    }
 }
